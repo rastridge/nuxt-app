@@ -5,4 +5,10 @@ export default defineNuxtConfig({
   modules: ["@nuxt/ui"],
   css: ["~/assets/css/main.css"],
   nitro: { experimental: { websocket: true } },
+  runtimeConfig: {
+    DB_HOST: "mysql.buffalorugby.org",
+    DB_USER: "rastridge",
+    DB_PASSWORD: "BMG$KGD3Y#tt$dY",
+    DB_DATABASE: "buffalorugby",
+  },
 });

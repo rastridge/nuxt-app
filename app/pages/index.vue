@@ -9,12 +9,17 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from "vue";
-
+<script setup>
 const currentUsername = ref("");
 
-const handleUsernameSet = (username: string) => {
+/* const getItem = async (user_name) => {
+  const { data } = await useFetch(`/chat/${user_name}`, {
+    method: "get",
+  });
+  return data.value;
+}; */
+
+const handleUsernameSet = (username) => {
   console.log("🎉 Username set:", username);
   currentUsername.value = username;
 };
@@ -25,6 +30,7 @@ const handleLeaveChat = () => {
 };
 
 onMounted(() => {
+  // const existingUsername = getItem("chat-username");
   const existingUsername = localStorage.getItem("chat-username");
   if (existingUsername) {
     console.log("🔄 Returning user detected:", existingUsername);

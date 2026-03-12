@@ -5,7 +5,7 @@
     <div class="max-w-md w-full space-y-8">
       <div>
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Join the Community Chat
+          Join the ASR Chat
         </h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           Choose a unique username to start chatting
@@ -53,6 +53,16 @@ const username = ref("");
 const error = ref("");
 const isJoining = ref(false);
 
+/* const setItem = async (chat_user: string) => {
+  const { data } = await useFetch(`/chat/set/`, {
+    method: "post",
+    body: {
+      chat_user,
+    },
+  });
+  return data.value;
+};
+ */
 const joinChat = async () => {
   if (!username.value.trim()) {
     error.value = "Username cannot be empty";
@@ -69,7 +79,7 @@ const joinChat = async () => {
 
   try {
     localStorage.setItem("chat-username", username.value.trim());
-    console.log("Username saved to localStorage!");
+    console.log("Username saved successfully:", username.value.trim());
 
     emit("username-set", username.value.trim());
   } catch (err) {

@@ -19,7 +19,7 @@
     <div class="flex-1 flex flex-col">
       <!-- Header with a personal touch -->
       <div class="bg-white shadow-sm p-4 flex justify-between items-center">
-        <h1 class="text-xl font-semibold">🚀 Community Chat</h1>
+        <h1 class="text-xl font-semibold">🚀 ASR Chat</h1>
         <div class="flex items-center space-x-2">
           <span class="text-sm text-gray-600"
             >Hey there, {{ currentUser }}! 👋</span
@@ -50,6 +50,9 @@
           <!-- Regular chat messages -->
           <UChatMessage
             v-else
+            id="message.id"
+            :parts="[{ type: 'text', text: message.message }]"
+            role="user"
             :content="message.message"
             :side="message.username === currentUser ? 'right' : 'left'"
             :variant="message.username === currentUser ? 'outline' : 'solid'"
@@ -72,7 +75,6 @@
             placeholder="What's on your mind? Type here..."
             class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
             maxlength="500"
-            @input="handleTyping"
           />
           <button
             type="submit"
@@ -88,6 +90,7 @@
 </template>
 
 <script setup lang="ts">
+import { user } from "#build/ui";
 import { io, Socket } from "socket.io-client";
 
 const props = defineProps<{
@@ -191,6 +194,13 @@ const sendMessage = () => {
   newMessage.value = "";
 };
 
+/* const removeItem = async (id: string) => {
+  const { data } = await useFetch(`/chat/${id}`, {
+    method: "DELETE",
+  });
+  return data.value;
+};
+ */
 const leaveChat = () => {
   console.log("👋 Leaving the chat...");
   if (socket.value) {
